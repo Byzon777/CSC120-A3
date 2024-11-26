@@ -3,28 +3,33 @@ import java.util.Scanner;
 
 /**
  * The Conversation class creates a simple chatbot that engages in a conversation
- * with the user by responding to their inputs. The chatbot attempts to mirror the user's
- * statements and generate random responses if personal pronouns are not detected.
+ * with the user by responding to their inputs. The chatbot mirrors the user's
+ * statements and generates random responses if personal pronouns are not detected.
  */
 class Conversation {
 
+    static String[] randomResponses = {"Neat!", "Interesting.", "I want to know more about it!", "I see.", "That's great!", "Hope you have a great day!"};
+
     /**
-     * The main method is the entry point of the program. It handles the conversation 
-     * by reading user inputs, generating responses, and printing a transcript of the conversation.
+     * The main method is the entry point of the program.
+     * It handles the conversation by reading user inputs, generating responses,
+     * and printing a transcript of the conversation.
+     *
+     * @param arguments command-line arguments (not used in this program)
      */
     public static void main(String[] arguments) {
-        //scan user response 
+        // Scan user response
         Scanner scanner = new Scanner(System.in);  
-        StringBuilder transcript = new StringBuilder(); // stringbuilder object to create the transcrip of the conversation 
+        StringBuilder transcript = new StringBuilder(); // StringBuilder object to create the transcript of the conversation
         Random random = new Random(); 
 
         System.out.println("How many rounds?"); 
-        int linesnum = scanner.nextInt(); // read from the console 
+        int linesnum = scanner.nextInt(); // Read from the console 
         scanner.nextLine();
 
         System.out.println("Hi there! What's on your mind?"); 
         
-        // reitirate the action to make a conversation 
+        // Iterate the action to make a conversation 
         for (int i = 0; i < linesnum; i++) {
             String userInput = scanner.nextLine();
             transcript.append(userInput).append("\n");
@@ -32,11 +37,10 @@ class Conversation {
             StringBuilder autoResponder = new StringBuilder();
             String reponse = " ";
 
-            // array of user entered text to manipulate with words
+            // Array of user-entered text to manipulate with words
             String[] words = userInput.split(" ");
-            // arry of pronouns that need to be mirrored
+            // Array of pronouns that need to be mirrored
             String[] pronouns = {"I", "me", "am", "you", "my", "your"};
-            
             
             boolean hasPronoun = false;
             boolean ismirrored = false;
@@ -85,14 +89,12 @@ class Conversation {
                             break;
                     }
                 }
-                reponse = autoResponder.toString().trim() +'?';
+                reponse = autoResponder.toString().trim() + '?';
             } else {
                 // Generate a random response if the input does not contain pronouns.
-                String[] randomResponses = {"Neat!", "Interesting.", "I want to know more about it!", "I see.", "That's great!", "Hope you have a great day!"};
                 reponse = randomResponses[random.nextInt(randomResponses.length)];
             }
-
-            transcript.append(reponse).append("\n"); // fill the transcript message with all sentences of conversation
+            transcript.append(reponse).append("\n"); // Fill the transcript message with all sentences of conversation
             System.out.println(reponse.toString().trim());
         }
 
